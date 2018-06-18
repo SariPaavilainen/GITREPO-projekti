@@ -20,6 +20,12 @@ namespace RataDigiTraffic.Model
         public bool cancelled; // true/false    Totta, jos junan peruminen on tehty 10 vuorokauden sisällä.Yli 10 vuorokautta sitten peruttuja junia ei palauteta rajapinnassa laisinkaan.
         public long version; // positive integer   Versionumero, jossa juna on viimeksi muuttunut
         public List<Aikataulurivi> timeTableRows;//  Kuvaa saapumisia ja lähtöjä liikennepaikoilta.Järjestetty reitin mukaiseen järjestykseen.
+
+        //public Juna(int junanNumero, string traintype)
+        //{
+        //    this.trainNumber = junanNumero;
+        //    this.trainType = traintype;
+        //}
     }
 
     public class Aikataulurivi
