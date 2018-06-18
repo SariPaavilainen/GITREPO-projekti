@@ -17,6 +17,12 @@ namespace RataDigiTraffic.Model
         public decimal latitude;
         public decimal longitude;
         public string type;
+
+        public Liikennepaikka(string nimi, string shortcode)
+        {
+            this.stationName = nimi;
+            this.stationShortCode = shortcode;
+        }
     }
 
 
