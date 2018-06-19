@@ -49,6 +49,27 @@ namespace RataDigiTraffic
             return res;
         }
 
+        // Tatu ja H-M koodasivat
+        public List<Juna> JunaNumerolla(int numero)
+        {
+            //Juna-tyyppinen lista, joka haetaan juna-numerolla
+            string json = "";
+            string url = $"https://rata.digitraffic.fi/api/v1/trains/" + DateTime.Now.ToString("yyyy-MM-dd");
+
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var response = client.GetAsync(url).Result;
+                var responseString = response.Content.ReadAsStringAsync().Result;
+                json = responseString;
+            }
+            List<Juna> res;
+            res = JsonConvert.DeserializeObject<List<Juna>>(json);
+            return res;
+        }
+
+        // tähän asti
+
         public List<Kulkutietoviesti> LiikennepaikanJunat(string paikka )
         {
             // Sama juttu kuin yllä, mutta tietyn parametrina annettavan paikan kautta kulkevat junat tänään

@@ -42,29 +42,18 @@ namespace DigiTrafficTester
             //    tulostaJunatVälillä(lähtöasema, kohdeasema);
             //}
 
-            //Koodasivat: Sari ja Tatu
-            Liikennepaikka l1 = new Liikennepaikka("Helsinki", "HKI");
-            List<Liikennepaikka> Lyhenteet = new List<Liikennepaikka>();
-            Lyhenteet.Add(l1);
-            l1 = new Liikennepaikka("Tampere", "TPE");
-            Lyhenteet.Add(l1);
-            l1 = new Liikennepaikka("Turku", "TKU");
-            Lyhenteet.Add(l1);
-            l1 = new Liikennepaikka("Lahti", "LH");
-            Lyhenteet.Add(l1);
 
-            Console.WriteLine("Tervetuloa Junajuttuun! Anna lähtöasema:");
-            string lähtö = Console.ReadLine();
-            string lähtöasema = RataDigiTraffic.Asema.EtsiAsema(lista: Lyhenteet, nimi: lähtö);
-           
-            Console.WriteLine("Anna asema, jonne haluat matkustaa asemalta "+lähtöasema+": ");
-            string kohde = Console.ReadLine();
+            string lähtöAsema;
+            string kohdeAsema;
+            Asema.Konduktööri(out lähtöAsema, out kohdeAsema);
 
-            string kohdeasema = RataDigiTraffic.Asema.EtsiAsema(lista: Lyhenteet, nimi: kohde);
-            
-            Console.WriteLine("Valittu matka "+lähtöasema+" - "+kohdeasema);
-            tulostaJunatVälillä(lähtöasema, kohdeasema);
-           
+            Console.WriteLine("Valittu matka " + lähtöAsema + " - " + kohdeAsema); //Tähän asti!
+            tulostaJunatVälillä(lähtöAsema, kohdeAsema);
+            //Koodasivat: Tatu ja Hanna-Mari
+            Console.WriteLine("Annan junan numero");
+            int junaSyöte = int.Parse(Console.ReadLine());
+            Console.WriteLine(EtsiJuna(junaSyöte));//Tähän asti!
+
         }
 
         private static void tulostaJunatVälillä(string lähtöasema, string kohdeasema)
@@ -89,7 +78,39 @@ namespace DigiTrafficTester
                 }
             }
         }
-    
+     //   //Koodasivat: Sari ja Tatu
+     //public static string EtsiAsema( List<Liikennepaikka> lista, string nimi)
+     //   {
+     //       foreach (var item in lista)
+     //       {
+     //           if (item.stationName == nimi) { return item.stationShortCode;}
+     //           else { continue; }
+     //       }
+     //       return "Asemaa ei löydy!";
+     //   }
+
+
+        // Tatu ja H-M koodasivat
+        public static string EtsiJuna(int junanNumero) // Tässä haetaan junan numeron avulla junan tyyppi
+        {
+            RataDigiTraffic.APIUtil rata = new RataDigiTraffic.APIUtil();
+            List<Juna> junat = rata.JunaNumerolla(junanNumero);
+            foreach (var item in junat)
+            {
+                if (item.trainNumber == junanNumero) //{ return item.trainType; }
+               
+                    foreach(var rivi in item.timeTableRows)
+                    {
+                        Console.WriteLine(rivi.stationShortCode + " " + rivi.type + " " + rivi.scheduledTime.ToLocalTime());  // Muokattu koodia niin, että hakee aseman lyhenteen, pysähdyksen tyypin ja lokalisoidun ajan näille.   
+                    }
+                
+                
+            }
+            
+            return "";
+        
+        }
+         // tähän asti  
 
         private static void printUsage()
         {

@@ -11,9 +11,10 @@ namespace RataDigiTraffic
     {
 
 
-        //Koodasivat Sari ja Tatu
+        //Koodasivat Sari ja Tatu, muokkasivat Sari ja Olli
         public static string EtsiAsema(List<Liikennepaikka> lista, string nimi)
         {
+
             char[] charsToTrim = { ' ', ',', '.', '1', '2', '3', '4', '5', '6', '7', '8', '9', '?', '!', '@' };
             nimi = nimi.Trim(charsToTrim);
             string alkukirjain = nimi.Substring(0, 1).ToUpper();
@@ -24,10 +25,11 @@ namespace RataDigiTraffic
                 if (item.stationName == nimi) { return item.stationShortCode; }
                 else { continue; }
             }
-            SmashTheKeyboard(lista, nimi);
-            return "Asemaa ei löydy!";
+            return null;
+          
         }
 
+        //Koodasivat Sari ja Olli
         public static string SmashTheKeyboard(List<Liikennepaikka> lista, string typo)
         {
             foreach (var item in lista)
@@ -38,15 +40,72 @@ namespace RataDigiTraffic
                 string loppunimi = typo.Substring(1, (typo.Length - 1)).ToLower();
                 typo = alkukirjain + loppunimi;
                 string nimi = item.stationName;
-                if (nimi.Substring(0,1) == typo.Substring(0,1))
+                if (nimi.Substring(0,1) == typo.Substring(0,1) && nimi.Substring(nimi.Length-1, 1) == typo.Substring(typo.Length-1, 1))
+
                 {
-                    return "Tarkoititko " + item.stationName + "?";
+                    return item.stationName.ToString();
                 }
                 else { continue; }
                 
             }
             return "Asemaa ei löydy!";
         }
+        // Koodasivat Olli ja Sari
+        public static void Konduktööri(out string lähtöAsema, out string kohdeAsema)
+        {
+            Console.WriteLine("Tervetuloa Junajuttuun!");
+         
+                annalähtöasema:
+                Console.WriteLine("Anna lähtöasema:");
+                string lähtö = Console.ReadLine();
+                AsemaLyhenteet pekka = new AsemaLyhenteet();
+                lähtöAsema = Asema.EtsiAsema(lista: pekka.TekeeLyhenteet(), nimi: lähtö);
+                if (lähtöAsema == null)
+                {
+                    string uusiLähtö = SmashTheKeyboard(pekka.TekeeLyhenteet(), lähtö);
+                if (lähtö == "Asemaa ei löydy!")
+                {
+                    goto annalähtöasema;
+                }
+                    Console.WriteLine("Tarkoititko " + uusiLähtö + "? (k/e)");
+                    var response = Console.ReadLine();
+                    if (response == "e")
+                    {
+                        goto annalähtöasema;
+
+                    }
+                    else { lähtöAsema = Asema.EtsiAsema(lista: pekka.TekeeLyhenteet(), nimi: uusiLähtö); }
+                }
+                annakohdeasema:
+                Console.WriteLine("Anna asema, jonne haluat matkustaa asemalta " + lähtöAsema + ": ");
+                string kohde = Console.ReadLine();
+
+                kohdeAsema = Asema.EtsiAsema(lista: pekka.TekeeLyhenteet(), nimi: kohde);
+                if (kohdeAsema == null)
+                {
+                    kohde = SmashTheKeyboard(pekka.TekeeLyhenteet(), kohde);
+                if (kohde == "Asemaa ei löydy!")
+                {
+                    Console.WriteLine("Asemaa ei löydy!");
+                    goto annakohdeasema;
+                }
+                    Console.WriteLine("Tarkoititko " + kohde + "? (k/e)");
+                    var response = Console.ReadLine();
+                    if (response == "e")
+                    {
+                    Console.WriteLine("Asemaa ei löydy!");
+                        goto annakohdeasema;
+
+                    }
+                    else { kohdeAsema = Asema.EtsiAsema(lista: pekka.TekeeLyhenteet(), nimi: kohde); }
+                }
+
+         
+           
+           
+
+        }
+       
 
     }
 }
