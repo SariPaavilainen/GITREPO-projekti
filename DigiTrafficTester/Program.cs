@@ -43,16 +43,20 @@ namespace DigiTrafficTester
             //}
 
 
-            string lähtöAsema;
-            string kohdeAsema;
-            Asema.Konduktööri(out lähtöAsema, out kohdeAsema);
+            Console.WriteLine("Tervetuloa junajuttuun! Olen konduktööri Pekka.\n Mitä haluat tehdä?\n 1) Etsiä seuraavat junat tietylle reitille?\n 2) Hakea junan tiedot junan numerolla?");
+            int vastaus = int.Parse(Console.ReadLine());
+            if (vastaus == 1) { SeuraavaJuna.KerroSeuraavatJunat(); }
+            if (vastaus == 2)
+            {
+                Console.WriteLine("Annan junan numero");
+                string junaSyöte = Console.ReadLine();
+                Console.WriteLine(Junanumerolla.EtsiJuna(junaSyöte));
+            }
+            
 
-            Console.WriteLine("Valittu matka " + lähtöAsema + " - " + kohdeAsema); //Tähän asti!
-            tulostaJunatVälillä(lähtöAsema, kohdeAsema);
+          
             //Koodasivat: Tatu ja Hanna-Mari
-            Console.WriteLine("Annan junan numero");
-            string junaSyöte = Console.ReadLine();
-            Console.WriteLine(Junanumerolla.EtsiJuna(junaSyöte));//Tähän asti!
+           //Tähän asti!
 
         }
 
