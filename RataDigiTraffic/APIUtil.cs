@@ -48,6 +48,8 @@ public List<Liikennepaikka> Liikennepaikat()
             res = JsonConvert.DeserializeObject<List<Juna>>(json);
             return res;
         }
+
+        // Tatu ja H-M koodasivat
         public List<Juna> JunaNumerolla(int numero)
         {
             //Sama juttu paitsi että Juna-tyyppinen lista kahden aseman välillä 
@@ -65,6 +67,8 @@ public List<Liikennepaikka> Liikennepaikat()
             res = JsonConvert.DeserializeObject<List<Juna>>(json);
             return res;
         }
+
+        // tähän asti
 
         public List<Kulkutietoviesti> LiikennepaikanJunat(string paikka )
         {

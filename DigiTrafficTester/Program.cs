@@ -103,7 +103,9 @@ namespace DigiTrafficTester
             return "Asemaa ei löydy!";
         }
 
-        public static string EtsiJuna(int junanNumero)
+
+        // Tatu ja H-M koodasivat
+        public static string EtsiJuna(int junanNumero) // Tässä haetaan junan numeron avulla junan tyyppi
         {
             List<Juna> junat;
             RataDigiTraffic.APIUtil rata = new RataDigiTraffic.APIUtil();
@@ -115,7 +117,7 @@ namespace DigiTrafficTester
             }
             return "Junaa ei löydy!";
         }
-           
+         // tähän asti  
 
         private static void printUsage()
         {
