@@ -48,6 +48,23 @@ public List<Liikennepaikka> Liikennepaikat()
             res = JsonConvert.DeserializeObject<List<Juna>>(json);
             return res;
         }
+        public List<Juna> JunaNumerolla(int numero)
+        {
+            //Sama juttu paitsi että Juna-tyyppinen lista kahden aseman välillä 
+            string json = "";
+            string url = $"https://rata.digitraffic.fi/api/v1/trains/2018-06-18/11";
+
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var response = client.GetAsync(url).Result;
+                var responseString = response.Content.ReadAsStringAsync().Result;
+                json = responseString;
+            }
+            List<Juna> res;
+            res = JsonConvert.DeserializeObject<List<Juna>>(json);
+            return res;
+        }
 
         public List<Kulkutietoviesti> LiikennepaikanJunat(string paikka )
         {

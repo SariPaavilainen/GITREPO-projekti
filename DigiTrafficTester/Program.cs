@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RataDigiTraffic;
 
 namespace DigiTrafficTester
 {
@@ -55,15 +54,19 @@ namespace DigiTrafficTester
 
             Console.WriteLine("Tervetuloa Junajuttuun! Anna lähtöasema:");
             string lähtö = Console.ReadLine();
-            string lähtöasema = RataDigiTraffic.Asema.EtsiAsema(lista: Lyhenteet, nimi: lähtö);
+            string lähtöasema = EtsiAsema(lista: Lyhenteet, nimi: lähtö);
            
-            Console.WriteLine("Anna asema, jonne haluat matkustaa asemalta "+lähtöasema+": ");
+            Console.WriteLine("Anna asema, jonne haluat matkustaa asemalta "+lähtö+": ");
             string kohde = Console.ReadLine();
 
-            string kohdeasema = RataDigiTraffic.Asema.EtsiAsema(lista: Lyhenteet, nimi: kohde);
+            string kohdeasema = EtsiAsema(lista: Lyhenteet, nimi: kohde);
             
-            Console.WriteLine("Valittu matka "+lähtöasema+" - "+kohdeasema);
+            Console.WriteLine("Valittu matka "+lähtö+" - "+kohde);
             tulostaJunatVälillä(lähtöasema, kohdeasema);
+
+            Console.WriteLine("Annan junan numero");
+            int junaSyöte = int.Parse(Console.ReadLine());
+            Console.WriteLine(EtsiJuna(junaSyöte));
            
         }
 
@@ -89,7 +92,30 @@ namespace DigiTrafficTester
                 }
             }
         }
-    
+        //Koodasivat: Sari ja Tatu
+     public static string EtsiAsema( List<Liikennepaikka> lista, string nimi)
+        {
+            foreach (var item in lista)
+            {
+                if (item.stationName == nimi) { return item.stationShortCode;}
+                else { continue; }
+            }
+            return "Asemaa ei löydy!";
+        }
+
+        public static string EtsiJuna(int junanNumero)
+        {
+            List<Juna> junat;
+            RataDigiTraffic.APIUtil rata = new RataDigiTraffic.APIUtil();
+            junat = rata.JunaNumerolla(11);
+            foreach (var item in junat)
+            {
+                if (item.trainNumber == junanNumero) { return item.trainType; }
+                else { continue; }
+            }
+            return "Junaa ei löydy!";
+        }
+           
 
         private static void printUsage()
         {
