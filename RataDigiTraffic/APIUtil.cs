@@ -48,11 +48,13 @@ public List<Liikennepaikka> Liikennepaikat()
             res = JsonConvert.DeserializeObject<List<Juna>>(json);
             return res;
         }
+
+        // Tatu ja H-M koodasivat
         public List<Juna> JunaNumerolla(int numero)
         {
-            //Sama juttu paitsi että Juna-tyyppinen lista kahden aseman välillä 
+            //Juna-tyyppinen lista, joka haetaan juna-numerolla
             string json = "";
-            string url = $"https://rata.digitraffic.fi/api/v1/trains/2018-06-18/11";
+            string url = $"https://rata.digitraffic.fi/api/v1/trains/" + DateTime.Now.ToString("yyyy-MM-dd");
 
             using (var client = new HttpClient())
             {
@@ -65,6 +67,8 @@ public List<Liikennepaikka> Liikennepaikat()
             res = JsonConvert.DeserializeObject<List<Juna>>(json);
             return res;
         }
+
+        // tähän asti
 
         public List<Kulkutietoviesti> LiikennepaikanJunat(string paikka )
         {
