@@ -51,8 +51,8 @@ namespace DigiTrafficTester
             tulostaJunatVälillä(lähtöAsema, kohdeAsema);
             //Koodasivat: Tatu ja Hanna-Mari
             Console.WriteLine("Annan junan numero");
-            int junaSyöte = int.Parse(Console.ReadLine());
-            Console.WriteLine(EtsiJuna(junaSyöte));//Tähän asti!
+            string junaSyöte = Console.ReadLine();
+            Console.WriteLine(Junanumerolla.EtsiJuna(junaSyöte));//Tähän asti!
 
         }
 
@@ -91,25 +91,25 @@ namespace DigiTrafficTester
 
 
         // Tatu ja H-M koodasivat
-        public static string EtsiJuna(int junanNumero) // Tässä haetaan junan numeron avulla junan tyyppi
-        {
-            RataDigiTraffic.APIUtil rata = new RataDigiTraffic.APIUtil();
-            List<Juna> junat = rata.JunaNumerolla(junanNumero);
-            foreach (var item in junat)
-            {
-                if (item.trainNumber == junanNumero) //{ return item.trainType; }
+        //public static string EtsiJuna(int junanNumero) // Tässä haetaan junan numeron avulla junan tyyppi --> siirretty omaksi luokaksi Junanumerolla.cs
+        //{
+        //    RataDigiTraffic.APIUtil rata = new RataDigiTraffic.APIUtil();
+        //    List<Juna> junat = rata.JunaNumerolla(junanNumero);
+        //    foreach (var item in junat)
+        //    {
+        //        if (item.trainNumber == junanNumero) //{ return item.trainType; }
                
-                    foreach(var rivi in item.timeTableRows)
-                    {
-                        Console.WriteLine(rivi.stationShortCode + " " + rivi.type + " " + rivi.scheduledTime.ToLocalTime());  // Muokattu koodia niin, että hakee aseman lyhenteen, pysähdyksen tyypin ja lokalisoidun ajan näille.   
-                    }
+        //            foreach(var rivi in item.timeTableRows)
+        //            {
+        //                Console.WriteLine(rivi.stationShortCode + " " + rivi.type + " " + rivi.scheduledTime.ToLocalTime());  // Muokattu koodia niin, että hakee aseman lyhenteen, pysähdyksen tyypin ja lokalisoidun ajan näille.   
+        //            }
                 
                 
-            }
+        //    }
             
-            return "";
+        //    return "";
         
-        }
+        //}
          // tähän asti  
 
         private static void printUsage()
