@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RataDigiTraffic;
 
 namespace DigiTrafficTester
 {
@@ -54,14 +55,14 @@ namespace DigiTrafficTester
 
             Console.WriteLine("Tervetuloa Junajuttuun! Anna lähtöasema:");
             string lähtö = Console.ReadLine();
-            string lähtöasema = EtsiAsema(lista: Lyhenteet, nimi: lähtö);
+            string lähtöasema = RataDigiTraffic.Asema.EtsiAsema(lista: Lyhenteet, nimi: lähtö);
            
-            Console.WriteLine("Anna asema, jonne haluat matkustaa asemalta "+lähtö+": ");
+            Console.WriteLine("Anna asema, jonne haluat matkustaa asemalta "+lähtöasema+": ");
             string kohde = Console.ReadLine();
 
-            string kohdeasema = EtsiAsema(lista: Lyhenteet, nimi: kohde);
+            string kohdeasema = RataDigiTraffic.Asema.EtsiAsema(lista: Lyhenteet, nimi: kohde);
             
-            Console.WriteLine("Valittu matka "+lähtö+" - "+kohde);
+            Console.WriteLine("Valittu matka "+lähtöasema+" - "+kohdeasema);
             tulostaJunatVälillä(lähtöasema, kohdeasema);
            
         }
@@ -88,17 +89,7 @@ namespace DigiTrafficTester
                 }
             }
         }
-        //Koodasivat: Sari ja Tatu
-     public static string EtsiAsema( List<Liikennepaikka> lista, string nimi)
-        {
-            foreach (var item in lista)
-            {
-                if (item.stationName == nimi) { return item.stationShortCode;}
-                else { continue; }
-            }
-            return "Asemaa ei löydy!";
-        }
-           
+    
 
         private static void printUsage()
         {
