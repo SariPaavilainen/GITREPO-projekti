@@ -50,6 +50,7 @@ namespace RataDigiTraffic
             }
             return "Asemaa ei löydy!";
         }
+        // Koodasivat Olli ja Sari
         public static void Konduktööri(out string lähtöAsema, out string kohdeAsema)
         {
             Console.WriteLine("Tervetuloa Junajuttuun!");
