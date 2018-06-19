@@ -107,15 +107,22 @@ namespace DigiTrafficTester
         // Tatu ja H-M koodasivat
         public static string EtsiJuna(int junanNumero) // Tässä haetaan junan numeron avulla junan tyyppi
         {
-            List<Juna> junat;
             RataDigiTraffic.APIUtil rata = new RataDigiTraffic.APIUtil();
-            junat = rata.JunaNumerolla(11);
+            List<Juna> junat = rata.JunaNumerolla(junanNumero);
             foreach (var item in junat)
             {
-                if (item.trainNumber == junanNumero) { return item.trainType; }
-                else { continue; }
+                if (item.trainNumber == junanNumero) //{ return item.trainType; }
+               
+                    foreach(var rivi in item.timeTableRows)
+                    {
+                        Console.WriteLine(rivi.stationShortCode + " " + rivi.type + " " + rivi.scheduledTime.ToLocalTime());  // Muokattu koodia niin, että hakee aseman lyhenteen, pysähdyksen tyypin ja lokalisoidun ajan näille.   
+                    }
+                
+                
             }
-            return "Junaa ei löydy!";
+            
+            return "";
+        
         }
          // tähän asti  
 
