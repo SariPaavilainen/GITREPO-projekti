@@ -81,8 +81,7 @@ namespace RataDigiTraffic
             Lyhenteet.Add(l1);
             l1 = new Liikennepaikka("Seinäjoki", "SK");
             Lyhenteet.Add(l1);
-            l1 = new Liikennepaikka("Pasila", "PSL");
-            Lyhenteet.Add(l1);
+
 
             return Lyhenteet;
         }

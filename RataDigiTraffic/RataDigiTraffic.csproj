@@ -47,6 +47,7 @@
     <Compile Include="APIUtil.cs" />
     <Compile Include="Asema.cs" />
     <Compile Include="AsemaLyhenteet.cs" />
+    <Compile Include="Junanumerolla.cs" />
     <Compile Include="Model\Juna.cs" />
     <Compile Include="Model\Kulkutietoviesti.cs" />
     <Compile Include="Model\Liikennepaikka.cs" />
