@@ -54,7 +54,7 @@ public List<Liikennepaikka> Liikennepaikat()
         {
             //Juna-tyyppinen lista, joka haetaan juna-numerolla
             string json = "";
-            string url = $"https://rata.digitraffic.fi/api/v1/trains/2018-06-18/11";
+            string url = $"https://rata.digitraffic.fi/api/v1/trains/" + DateTime.Now.ToString("yyyy-MM-dd");
 
             using (var client = new HttpClient())
             {
