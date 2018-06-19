@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RataDigiTraffic;
 
 namespace DigiTrafficTester
 {
@@ -41,33 +42,18 @@ namespace DigiTrafficTester
             //    tulostaJunatVälillä(lähtöasema, kohdeasema);
             //}
 
-            //Koodasivat: Sari ja Tatu
-            Liikennepaikka l1 = new Liikennepaikka("Helsinki", "HKI");
-            List<Liikennepaikka> Lyhenteet = new List<Liikennepaikka>();
-            Lyhenteet.Add(l1);
-            l1 = new Liikennepaikka("Tampere", "TPE");
-            Lyhenteet.Add(l1);
-            l1 = new Liikennepaikka("Turku", "TKU");
-            Lyhenteet.Add(l1);
-            l1 = new Liikennepaikka("Lahti", "LH");
-            Lyhenteet.Add(l1);
 
-            Console.WriteLine("Tervetuloa Junajuttuun! Anna lähtöasema:");
-            string lähtö = Console.ReadLine();
-            string lähtöasema = EtsiAsema(lista: Lyhenteet, nimi: lähtö);
-           
-            Console.WriteLine("Anna asema, jonne haluat matkustaa asemalta "+lähtö+": ");
-            string kohde = Console.ReadLine();
+            string lähtöAsema;
+            string kohdeAsema;
+            Asema.Konduktööri(out lähtöAsema, out kohdeAsema);
 
-            string kohdeasema = EtsiAsema(lista: Lyhenteet, nimi: kohde);
-            
-            Console.WriteLine("Valittu matka "+lähtö+" - "+kohde);
-            tulostaJunatVälillä(lähtöasema, kohdeasema);
-
+            Console.WriteLine("Valittu matka " + lähtöAsema + " - " + kohdeAsema); //Tähän asti!
+            tulostaJunatVälillä(lähtöAsema, kohdeAsema);
+            //Koodasivat: Tatu ja Hanna-Mari
             Console.WriteLine("Annan junan numero");
             int junaSyöte = int.Parse(Console.ReadLine());
-            Console.WriteLine(EtsiJuna(junaSyöte));
-           
+            Console.WriteLine(EtsiJuna(junaSyöte));//Tähän asti!
+
         }
 
         private static void tulostaJunatVälillä(string lähtöasema, string kohdeasema)
@@ -92,16 +78,16 @@ namespace DigiTrafficTester
                 }
             }
         }
-        //Koodasivat: Sari ja Tatu
-     public static string EtsiAsema( List<Liikennepaikka> lista, string nimi)
-        {
-            foreach (var item in lista)
-            {
-                if (item.stationName == nimi) { return item.stationShortCode;}
-                else { continue; }
-            }
-            return "Asemaa ei löydy!";
-        }
+     //   //Koodasivat: Sari ja Tatu
+     //public static string EtsiAsema( List<Liikennepaikka> lista, string nimi)
+     //   {
+     //       foreach (var item in lista)
+     //       {
+     //           if (item.stationName == nimi) { return item.stationShortCode;}
+     //           else { continue; }
+     //       }
+     //       return "Asemaa ei löydy!";
+     //   }
 
         public static string EtsiJuna(int junanNumero)
         {

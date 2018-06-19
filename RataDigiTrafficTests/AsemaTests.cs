@@ -17,18 +17,11 @@ namespace RataDigiTraffic.Tests
         [TestMethod()]
         public void IsotJaPienetKirjaimetTest()
         {
-            Liikennepaikka l1 = new Liikennepaikka("Helsinki", "HKI");
-            List<Liikennepaikka> Lyhenteet = new List<Liikennepaikka>();
-            Lyhenteet.Add(l1);
-            l1 = new Liikennepaikka("Tampere", "TPE");
-            Lyhenteet.Add(l1);
-            l1 = new Liikennepaikka("Turku", "TKU");
-            Lyhenteet.Add(l1);
-            l1 = new Liikennepaikka("Lahti", "LH");
-            Lyhenteet.Add(l1);
+            AsemaLyhenteet lyh = new AsemaLyhenteet();
+            lyh.TekeeLyhenteet();
             string nimi = "heLsiNkI";
             string expected = "HKI";
-            string actual = Asema.EtsiAsema(Lyhenteet, nimi);
+            string actual = Asema.EtsiAsema(lyh.TekeeLyhenteet(), nimi);
             Assert.AreEqual(expected, actual, "Isot ja pienet kirjaimet pielessä!");
         }
 
