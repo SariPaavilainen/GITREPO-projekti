@@ -52,7 +52,7 @@ public List<Liikennepaikka> Liikennepaikat()
         // Tatu ja H-M koodasivat
         public List<Juna> JunaNumerolla(int numero)
         {
-            //Sama juttu paitsi että Juna-tyyppinen lista kahden aseman välillä 
+            //Juna-tyyppinen lista, joka haetaan juna-numerolla
             string json = "";
             string url = $"https://rata.digitraffic.fi/api/v1/trains/2018-06-18/11";
 
