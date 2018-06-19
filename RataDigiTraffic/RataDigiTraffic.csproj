@@ -51,6 +51,7 @@
     <Compile Include="Model\Kulkutietoviesti.cs" />
     <Compile Include="Model\Liikennepaikka.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeuraavaJuna.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -45,14 +45,17 @@ namespace DigiTrafficTester
 
             string lähtöAsema;
             string kohdeAsema;
-            Asema.Konduktööri(out lähtöAsema, out kohdeAsema);
 
-            Console.WriteLine("Valittu matka " + lähtöAsema + " - " + kohdeAsema); //Tähän asti!
-            tulostaJunatVälillä(lähtöAsema, kohdeAsema);
-            //Koodasivat: Tatu ja Hanna-Mari
-            Console.WriteLine("Annan junan numero");
-            int junaSyöte = int.Parse(Console.ReadLine());
-            Console.WriteLine(EtsiJuna(junaSyöte));//Tähän asti!
+            SeuraavaJuna.KerroSeuraavatJunat();
+            //    Asema.Konduktööri(out lähtöAsema, out kohdeAsema);
+
+            //    Console.WriteLine("Valittu matka " + lähtöAsema + " - " + kohdeAsema); //Tähän asti!
+            //    tulostaJunatVälillä(lähtöAsema, kohdeAsema);
+            //    Console.WriteLine("Haluatko \n 1) Hakea seuraavat junat?\n 2) Tietää yhden junan tiedot?");
+            //    //Koodasivat: Tatu ja Hanna-Mari
+            //    Console.WriteLine("Annan junan numero");
+            //    int junaSyöte = int.Parse(Console.ReadLine());
+            //    Console.WriteLine(EtsiJuna(junaSyöte));//Tähän asti!
 
         }
 

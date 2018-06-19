@@ -17,15 +17,20 @@ namespace RataDigiTraffic
 
             char[] charsToTrim = { ' ', ',', '.', '1', '2', '3', '4', '5', '6', '7', '8', '9', '?', '!', '@' };
             nimi = nimi.Trim(charsToTrim);
-            string alkukirjain = nimi.Substring(0, 1).ToUpper();
-            string loppunimi = nimi.Substring(1, (nimi.Length - 1)).ToLower();
-            nimi = alkukirjain + loppunimi;
-            foreach (var item in lista)
+            if (nimi.Length == 0) { return null; }
+            else
             {
-                if (item.stationName == nimi) { return item.stationShortCode; }
-                else { continue; }
+                string alkukirjain = nimi.Substring(0, 1).ToUpper();
+                string loppunimi = nimi.Substring(1, (nimi.Length - 1)).ToLower();
+                nimi = alkukirjain + loppunimi;
+                foreach (var item in lista)
+                {
+                    if (item.stationName == nimi) { return item.stationShortCode; }
+                    else { continue; }
+                }
+
+                return null; 
             }
-            return null;
           
         }
 
@@ -36,16 +41,27 @@ namespace RataDigiTraffic
             {
                 char[] charsToTrim = { ' ', ',', '.', '1', '2', '3', '4', '5', '6', '7', '8', '9', '?', '!', '@' };
                 typo = typo.Trim(charsToTrim);
-                string alkukirjain = typo.Substring(0, 1).ToUpper();
-                string loppunimi = typo.Substring(1, (typo.Length - 1)).ToLower();
-                typo = alkukirjain + loppunimi;
-                string nimi = item.stationName;
-                if (nimi.Substring(0,1) == typo.Substring(0,1) && nimi.Substring(nimi.Length-1, 1) == typo.Substring(typo.Length-1, 1))
-
+                if (typo.Length == 0)
                 {
-                    return item.stationName.ToString();
+                    return "Asemaa ei löydy!";
                 }
-                else { continue; }
+                else
+                {
+                    string alkukirjain = typo.Substring(0, 1).ToUpper();
+                    string loppunimi = typo.Substring(1, (typo.Length - 1)).ToLower();
+                    typo = alkukirjain + loppunimi;
+                    string nimi = item.stationName;
+                    if (nimi.Substring(0, 1) == typo.Substring(0, 1) && nimi.Substring(nimi.Length - 1, 1) == typo.Substring(typo.Length - 1, 1))
+
+                    {
+                        return item.stationName.ToString();
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                    
+                }
                 
             }
             return "Asemaa ei löydy!";
@@ -62,16 +78,19 @@ namespace RataDigiTraffic
                 lähtöAsema = Asema.EtsiAsema(lista: pekka.TekeeLyhenteet(), nimi: lähtö);
                 if (lähtöAsema == null)
                 {
+
                     string uusiLähtö = SmashTheKeyboard(pekka.TekeeLyhenteet(), lähtö);
-                if (lähtö == "Asemaa ei löydy!")
+                if (uusiLähtö == "Asemaa ei löydy!")
                 {
+                    Console.WriteLine("Asemaa ei löydy!");
                     goto annalähtöasema;
                 }
                     Console.WriteLine("Tarkoititko " + uusiLähtö + "? (k/e)");
                     var response = Console.ReadLine();
                     if (response == "e")
                     {
-                        goto annalähtöasema;
+                    Console.WriteLine("Asemaa ei löydy!");
+                    goto annalähtöasema;
 
                     }
                     else { lähtöAsema = Asema.EtsiAsema(lista: pekka.TekeeLyhenteet(), nimi: uusiLähtö); }
@@ -83,8 +102,8 @@ namespace RataDigiTraffic
                 kohdeAsema = Asema.EtsiAsema(lista: pekka.TekeeLyhenteet(), nimi: kohde);
                 if (kohdeAsema == null)
                 {
-                    kohde = SmashTheKeyboard(pekka.TekeeLyhenteet(), kohde);
-                if (kohde == "Asemaa ei löydy!")
+                    string uusiKohde = SmashTheKeyboard(pekka.TekeeLyhenteet(), kohde);
+                if (uusiKohde == "Asemaa ei löydy!")
                 {
                     Console.WriteLine("Asemaa ei löydy!");
                     goto annakohdeasema;
