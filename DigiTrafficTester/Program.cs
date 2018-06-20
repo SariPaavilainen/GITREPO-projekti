@@ -48,7 +48,7 @@ namespace DigiTrafficTester
             if (vastaus == 1) { SeuraavaJuna.KerroSeuraavatJunat(); }
             if (vastaus == 2)
             {
-                Console.WriteLine("Annan junan numero");
+                Console.WriteLine("Anna junan numero");
                 string junaSyöte = Console.ReadLine();
                 Console.WriteLine(Junanumerolla.EtsiJuna(junaSyöte));
             }
