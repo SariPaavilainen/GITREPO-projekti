@@ -60,9 +60,13 @@ namespace RataDigiTraffic
                     }
                 
              }
-            var oikea = VaihtoehtoKäsittelijä(samanlaiset);
+            SortedDictionary<string, string> Sortti = Asema.YhtenevätKirjaimet(typo, samanlaiset);
+            
+            var oikea = VaihtoehtoKäsittelijä(Sortti);
             return oikea;
         }
+
+
         // Koodasivat Olli ja Sari
         public static void Konduktööri(out string lähtöAsema, out string kohdeAsema)
         {
@@ -109,21 +113,19 @@ namespace RataDigiTraffic
 
         }
         //Koodasivat Sari ja Olli, muokkasi omaksi metodikseen Sari
-        public static string VaihtoehtoKäsittelijä(List<string> lista)
+        public static string VaihtoehtoKäsittelijä(SortedDictionary<string, string> lista)
         { 
             // Käydään läpi Smash the keyboard() -metodin antamat lähinnä syötettä vastaavat
             // aseman nimet ja kysytään käyttäjältä, oliko joku niistä käyttäjän tarkoittama asema
-            foreach (var vaihtoehto in lista)
-            {
-
-
-                Console.WriteLine("Tarkoititko " + vaihtoehto + "? (k/e)");
+            foreach (var vaihtoehto in lista.Reverse())
+            { 
+                Console.WriteLine("Tarkoititko " + vaihtoehto.Value + "? (k/e)");
                 var response = Console.ReadLine();
                 switch (response)
                 {
                     case "k":
 
-                        return vaihtoehto;
+                        return vaihtoehto.Value;
 
                     case "e":
                         break;
@@ -152,5 +154,33 @@ namespace RataDigiTraffic
                 return syöte;
             }
         }
+        public static SortedDictionary<string, string> YhtenevätKirjaimet(string typo, List<string> lista)
+        {
+            SortedDictionary<string, string> listaus = new SortedDictionary<string, string>();
+            int kirjainlaskuri = 0;
+
+            foreach (var item in lista)
+            {
+                
+                foreach (var kirjain in typo)
+                {
+                    if (item.Contains(kirjain))
+                        kirjainlaskuri++;
+                }
+                try
+                {
+                    listaus.Add(kirjainlaskuri.ToString(), item);
+                    kirjainlaskuri = 0;
+                }
+                catch (Exception)
+                {
+
+                    kirjainlaskuri++;
+                    listaus.Add(kirjainlaskuri.ToString(), item);
+                }
+            }
+            return listaus;
+        }
+
     }
 }
