@@ -100,7 +100,7 @@ namespace DigiTrafficTester
      //   }
 
 
-        // Tatu ja H-M koodasivat
+        // Tatu ja H-M koodasivat --> siirretty omaan classiin
         //public static string EtsiJuna(int junanNumero) // Tässä haetaan junan numeron avulla junan tyyppi --> siirretty omaksi luokaksi Junanumerolla.cs
         //{
         //    RataDigiTraffic.APIUtil rata = new RataDigiTraffic.APIUtil();
