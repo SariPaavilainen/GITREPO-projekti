@@ -14,7 +14,7 @@ namespace RataDigiTraffic
         //Koodasivat Sari ja Tatu, muokkasivat Sari ja Olli
         public static string EtsiAsema(List<Liikennepaikka> lista, string nimi)
         {
-
+            //Muotoillaan käyttäjän inputista oikeanmuotoinen syöte listaan verrattavaksi
             char[] charsToTrim = { ' ', ',', '.', '1', '2', '3', '4', '5', '6', '7', '8', '9', '?', '!', '@', '\'' };
             nimi = nimi.Trim(charsToTrim);
             if (nimi.Length == 0) { return null; }
@@ -23,6 +23,7 @@ namespace RataDigiTraffic
                 string alkukirjain = nimi.Substring(0, 1).ToUpper();
                 string loppunimi = nimi.Substring(1, (nimi.Length - 1)).ToLower();
                 nimi = alkukirjain + loppunimi;
+                //Etsitään käyttäjän syöte listasta
                 foreach (var item in lista)
                 {
                     if (item.stationName == nimi) { return item.stationShortCode; }
@@ -35,8 +36,9 @@ namespace RataDigiTraffic
         }
 
         //Koodasivat Sari ja Olli
-        public static void SmashTheKeyboard(List<Liikennepaikka> lista, string typo, out string koodi, out List<string> vaihtoehdot)
+        public static string SmashTheKeyboard(List<Liikennepaikka> lista, string typo)
         {
+            //Muokataan käyttäjän inputista 
             List<string> samanlaiset = new List<string>();
             foreach (var item in lista)
             {
@@ -44,8 +46,8 @@ namespace RataDigiTraffic
                 typo = typo.Trim(charsToTrim);
                 if (typo.Length == 0)
                 {
-                    koodi =  "Asemaa ei löydy!";
-                    vaihtoehdot = null;
+                    return  "Asemaa ei löydy!";
+                    
                 }
                 else
                 {
@@ -63,13 +65,11 @@ namespace RataDigiTraffic
                     else
                     {
                         continue;
-                    }
-                    
+                    }  
                 }
-                
             }
-            koodi = null;
-            vaihtoehdot = samanlaiset;
+            var oikea = VaihtoehtoKäsittelijä(samanlaiset);
+            return oikea;
         }
         // Koodasivat Olli ja Sari
         public static void Konduktööri(out string lähtöAsema, out string kohdeAsema)
@@ -81,100 +81,64 @@ namespace RataDigiTraffic
                 string lähtö = Console.ReadLine();
                 AsemaLyhenteet pekka = new AsemaLyhenteet();
                 lähtöAsema = Asema.EtsiAsema(lista: pekka.TekeeLyhenteet(), nimi: lähtö);
-                 string vastaus;
-                 List<string> vaihtoehdot;
+             
                 if (lähtöAsema == null)
                 {
-                   SmashTheKeyboard(pekka.TekeeLyhenteet(), lähtö, out vastaus, out vaihtoehdot);
+                   string uusiLähtö = SmashTheKeyboard(pekka.TekeeLyhenteet(), lähtö);
+                lähtöAsema = EtsiAsema(pekka.TekeeLyhenteet(), uusiLähtö);
+                lähtö = uusiLähtö;
 
-                      if (vastaus == "Asemaa ei löydy!")
+                      if (lähtöAsema == null)
                      {
                              Console.WriteLine("Asemaa ei löydy!");
                             goto annalähtöasema;
-                        }
-                foreach (var uusiLähtö in vaihtoehdot)
-                {
-
-                
-                    Console.WriteLine("Tarkoititko " + uusiLähtö + "? (k/e)");
-                    var response = Console.ReadLine().Substring(0,1).ToLower();
-                    switch (response)
-                    {
-                        case "k":
-                            
-                                lähtöAsema = Asema.EtsiAsema(lista: pekka.TekeeLyhenteet(), nimi: uusiLähtö);
-                                break;
-
-                        case "e":
-                            break;
-
-                        default:
-                            Console.WriteLine("Anna vastaus (k/e)");
-                            response = Console.ReadLine().Substring(0, 1).ToString();
-                            break;
-                    }
-                    if (lähtöAsema != null) { break; }
-                  
-                    
+                      }
                 }
-                if (lähtöAsema == null)
-                {
-                    Console.WriteLine("Asemaa ei löydy!");
-                    goto annalähtöasema;
-                }
-            }
                 annakohdeasema:
-                Console.WriteLine("Anna asema, jonne haluat matkustaa asemalta " + lähtöAsema + ": ");
+                Console.WriteLine("Anna asema, jonne haluat matkustaa asemalta " + lähtö + ": ");
                 string kohde = Console.ReadLine();
             
             kohdeAsema = Asema.EtsiAsema(lista: pekka.TekeeLyhenteet(), nimi: kohde);
             if (kohdeAsema == null)
             {
-                SmashTheKeyboard(pekka.TekeeLyhenteet(), kohde, out vastaus, out vaihtoehdot);
-                if (vastaus == "Asemaa ei löydy!")
+                string uusiKohde = SmashTheKeyboard(pekka.TekeeLyhenteet(), kohde);
+                kohdeAsema = Asema.EtsiAsema(pekka.TekeeLyhenteet(), uusiKohde);
+                kohde = uusiKohde;
+                if ( kohdeAsema == null)
                 {
                     Console.WriteLine("Asemaa ei löydy!");
                     goto annakohdeasema;
                 }
-                foreach (var uusiKohde in vaihtoehdot)
-                {
-
-
-                    Console.WriteLine("Tarkoititko " + uusiKohde + "? (k/e)");
-                    var response = Console.ReadLine();
-                    switch (response)
-                    {
-                        case "k":
-
-                            kohdeAsema = Asema.EtsiAsema(lista: pekka.TekeeLyhenteet(), nimi: uusiKohde);
-                            break;
-
-                        case "e":
-                            break;
-
-                        default:
-                            Console.WriteLine("Anna vastaus (k/e)");
-                            response = Console.ReadLine().Substring(0, 1).ToString();
-                            break;
-                    }
-                    if (kohdeAsema != null) { break; }
-
-
-                }
-                if (kohdeAsema == null)
-                {
-                    Console.WriteLine("Asemaa ei löydy!");
-                    goto annakohdeasema;
-                }
+            
             }
 
-            
-         
-           
-           
-
         }
-       
+        //Koodasivat Sari ja Olli, muokkasi omaksi metodikseen Sari
+        public static string VaihtoehtoKäsittelijä(List<string> lista)
+        {
+            foreach (var vaihtoehto in lista)
+            {
 
+
+                Console.WriteLine("Tarkoititko " + vaihtoehto + "? (k/e)");
+                var response = Console.ReadLine();
+                switch (response)
+                {
+                    case "k":
+
+                        return vaihtoehto;
+
+                    case "e":
+                        break;
+
+                    default:
+                        Console.WriteLine("Anna vastaus (k/e)");
+                        response = Console.ReadLine().Substring(0, 1).ToString();
+                        break;
+                }
+
+            }
+            return "Asemaa ei löydy!";
+        }
     }
 }
