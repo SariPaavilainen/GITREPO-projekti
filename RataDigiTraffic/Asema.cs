@@ -74,8 +74,6 @@ namespace RataDigiTraffic
         // Koodasivat Olli ja Sari
         public static void Konduktööri(out string lähtöAsema, out string kohdeAsema)
         {
-            Console.WriteLine("Tervetuloa Junajuttuun!");
-         
                 annalähtöasema:
                 Console.WriteLine("Anna lähtöasema:");
                 string lähtö = Console.ReadLine();
