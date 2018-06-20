@@ -60,13 +60,14 @@ namespace RataDigiTraffic
            
             string syöte= Console.ReadLine();
             string lähtö = Asema.Trimmeri(syöte);
+            RataDigiTraffic.APIUtil rata = new RataDigiTraffic.APIUtil();
             AsemaLyhenteet pekka = new AsemaLyhenteet();
-            lähtöAsema = Asema.EtsiAsema(lista: pekka.TekeeLyhenteet(), nimi: lähtö);
+            lähtöAsema = Asema.EtsiAsema(lista: rata.Liikennepaikat(), nimi: lähtö);
 
             if (lähtöAsema == null)
             {
-                string uusiLähtö = SmashTheKeyboard(pekka.TekeeLyhenteet(), lähtö);
-                lähtöAsema = EtsiAsema(pekka.TekeeLyhenteet(), uusiLähtö);
+                string uusiLähtö = SmashTheKeyboard(rata.Liikennepaikat(), lähtö);
+                lähtöAsema = EtsiAsema(rata.Liikennepaikat(), uusiLähtö);
                 lähtö = uusiLähtö;
                 if (lähtöAsema == null)
                 {
@@ -78,11 +79,11 @@ namespace RataDigiTraffic
             Console.WriteLine("Anna asema, jonne haluat matkustaa asemalta " + lähtö + ": ");
             syöte = Console.ReadLine();
             string kohde = Asema.Trimmeri(syöte);
-            kohdeAsema = Asema.EtsiAsema(lista: pekka.TekeeLyhenteet(), nimi: kohde);
+            kohdeAsema = Asema.EtsiAsema(lista: rata.Liikennepaikat(), nimi: kohde);
             if (kohdeAsema == null)
             {
-                string uusiKohde = SmashTheKeyboard(pekka.TekeeLyhenteet(), kohde);
-                kohdeAsema = Asema.EtsiAsema(pekka.TekeeLyhenteet(), uusiKohde);
+                string uusiKohde = SmashTheKeyboard(rata.Liikennepaikat(), kohde);
+                kohdeAsema = Asema.EtsiAsema(rata.Liikennepaikat(), uusiKohde);
                 kohde = uusiKohde;
                 if (kohdeAsema == null)
                 {

@@ -31,8 +31,8 @@ namespace DigiTrafficTester
            " / -OO----OO'' = 'OO--OO'=  'OO--------OO'='OO-------OO'='OO-------OO'= P     \t\n"+
            "##############################################################################\t\n"+
            "\n");
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\Olli\source\repos\junajuttuvol22\DigiTrafficTester\sound\TrainWhistle-_2_.wav");
-            player.Play();
+            //System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\Sari\Source\Repos\junajuttuvol2\DigiTrafficTester\sound\TrainWhistle-_2_.wav");
+            //player.Play();
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
         }
@@ -41,8 +41,8 @@ namespace DigiTrafficTester
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
 
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\Olli\source\repos\junajuttuvol22\DigiTrafficTester\sound\91926__tim-kahn__ding.wav");
-            player.Play();
+            //System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\Sari\Source\Repos\junajuttuvol2\DigiTrafficTester\sound\91926__tim-kahn__ding.wav");
+            //player.Play();
 
             Console.WriteLine("\n" +
               "\n" +

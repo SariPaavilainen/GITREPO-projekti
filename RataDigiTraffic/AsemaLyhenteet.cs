@@ -9,6 +9,7 @@ namespace RataDigiTraffic
 {
     public class AsemaLyhenteet
     {
+        
         public List<Liikennepaikka> TekeeLyhenteet()
         //Koodasivat: Sari ja Tatu
         {
