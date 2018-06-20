@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RataDigiTraffic;
+using System.Threading;
 
 namespace DigiTrafficTester
 {
@@ -16,6 +17,7 @@ namespace DigiTrafficTester
             Console.SetWindowSize(Console.LargestWindowWidth - 40, Console.LargestWindowHeight - 15);
 
             intro.Alku();
+            Thread.Sleep(3000);
             Console.WriteLine("Tervetuloa Junajuttuun! Olen konduktööri Pekka.");
             Console.WriteLine("##############################################");
            
@@ -25,13 +27,15 @@ namespace DigiTrafficTester
             {   intro.PekkaImg();
                 Console.WriteLine("Mitä haluat tehdä?\n 1) Etsiä seuraavat junat tietylle reitille\n 2) Hakea junan tiedot junan numerolla\n Info) Saada lisätietoa sovelluksesta");
                 string vastaus = Console.ReadLine();
-                if (vastaus == "1") {
+                if (vastaus == "1")
+                {
                     Console.Clear();
                     Console.WriteLine("SEURAAVAT JUNAT REITILLE");
                     Console.WriteLine("##############################");
                     intro.PekkaImg();
                     Console.WriteLine("Etsitään seuraavat junat haluamallesi reitille.");
-                    SeuraavaJuna.KerroSeuraavatJunat(); }
+                    SeuraavaJuna.KerroSeuraavatJunat();
+                }
                 if (vastaus == "2")
                 {
                     Console.Clear();
@@ -59,13 +63,14 @@ namespace DigiTrafficTester
                         "Grafiikka https://asciiart.eu; Äänitehosteet https://zapsplat.com \n"+
                         "##############################");
                 }
-                else { continue; }
+               
                 Console.WriteLine("Haluatko tehdä uuden haun? (k/e)");
                 response = Console.ReadLine();
                 Console.Clear();
             } while (response == "k");
             intro.PekkaImg();
             Console.WriteLine("Kiitos kun kävit Junajutussa! Hyvää matkaa!");
+            Thread.Sleep(2500);
             intro.Alku();
          
 
@@ -97,39 +102,7 @@ namespace DigiTrafficTester
                 }
             }
         }
-     //   //Koodasivat: Sari ja Tatu
-     //public static string EtsiAsema( List<Liikennepaikka> lista, string nimi)
-     //   {
-     //       foreach (var item in lista)
-     //       {
-     //           if (item.stationName == nimi) { return item.stationShortCode;}
-     //           else { continue; }
-     //       }
-     //       return "Asemaa ei löydy!";
-     //   }
-
-
-        // Tatu ja H-M koodasivat
-        //public static string EtsiJuna(int junanNumero) // Tässä haetaan junan numeron avulla junan tyyppi --> siirretty omaksi luokaksi Junanumerolla.cs
-        //{
-        //    RataDigiTraffic.APIUtil rata = new RataDigiTraffic.APIUtil();
-        //    List<Juna> junat = rata.JunaNumerolla(junanNumero);
-        //    foreach (var item in junat)
-        //    {
-        //        if (item.trainNumber == junanNumero) //{ return item.trainType; }
-               
-        //            foreach(var rivi in item.timeTableRows)
-        //            {
-        //                Console.WriteLine(rivi.stationShortCode + " " + rivi.type + " " + rivi.scheduledTime.ToLocalTime());  // Muokattu koodia niin, että hakee aseman lyhenteen, pysähdyksen tyypin ja lokalisoidun ajan näille.   
-        //            }
-                
-                
-        //    }
-            
-        //    return "";
-        
-        //}
-         // tähän asti  
+    
 
         private static void printUsage()
         {
