@@ -16,8 +16,8 @@ namespace RataDigiTraffic.Tests
         {
             RataDigiTraffic.Junanumerolla j = new RataDigiTraffic.Junanumerolla();
             string junanNumero = "42";
-            bool expected = true;
-            bool actual = Junanumerolla.EtsiJuna(junanNumero);
+            string expected = "";
+            string actual = Junanumerolla.EtsiJuna(junanNumero);
             Assert.AreEqual(expected, actual, "Joku on pielessä, pitäisi olla oikea junan numero!");
         }
 
@@ -26,8 +26,8 @@ namespace RataDigiTraffic.Tests
         {
             RataDigiTraffic.Junanumerolla j = new RataDigiTraffic.Junanumerolla();
             string junanNumero = "0";
-            bool expected = false;
-            bool actual = Junanumerolla.EtsiJuna(junanNumero);
+            string expected = "Junan numero voi olla välillä 1-99999";
+            string actual = Junanumerolla.EtsiJuna(junanNumero);
             Assert.AreEqual(expected, actual, "Joku on pielessä, junan numero ei voi olla 0!");
         }
 
@@ -36,8 +36,8 @@ namespace RataDigiTraffic.Tests
         {
             RataDigiTraffic.Junanumerolla j = new RataDigiTraffic.Junanumerolla();
             string junanNumero = "467859";
-            bool expected = false;
-            bool actual = Junanumerolla.EtsiJuna(junanNumero);
+            string expected = "Junan numero voi olla välillä 1-99999";
+            string actual = Junanumerolla.EtsiJuna(junanNumero);
             Assert.AreEqual(expected, actual, "Liian pitkä numero!");
         }
         [TestMethod()]
@@ -45,8 +45,8 @@ namespace RataDigiTraffic.Tests
         {
             RataDigiTraffic.Junanumerolla j = new RataDigiTraffic.Junanumerolla();
             string junanNumero = "4kh36c";
-            bool expected = false;
-            bool actual = Junanumerolla.EtsiJuna(junanNumero);
+            string expected = "Et syöttänyt numeroa!";
+            string actual = Junanumerolla.EtsiJuna(junanNumero);
             Assert.AreEqual(expected, actual, "Syötä numero!");
         }
 
@@ -55,8 +55,8 @@ namespace RataDigiTraffic.Tests
         {
             RataDigiTraffic.Junanumerolla j = new RataDigiTraffic.Junanumerolla();
             string junanNumero = "IC160";
-            bool expected = true;
-            bool actual = Junanumerolla.EtsiJuna(junanNumero);
+            string expected = "";
+            string actual = Junanumerolla.EtsiJuna(junanNumero);
             Assert.AreEqual(expected, actual, "Joku on pielessä, pitäisi olla oikea junan numero!");
         }
     }
