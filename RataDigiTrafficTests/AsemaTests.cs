@@ -13,69 +13,65 @@ namespace RataDigiTraffic.Tests
     [TestClass()]
     public class AsemaTests
     {
+        //
 
         [TestMethod()]
         public void IsotJaPienetKirjaimetTest()
         {
-            AsemaLyhenteet lyh = new AsemaLyhenteet();
-            lyh.TekeeLyhenteet();
-            string nimi = "heLsiNkI";
-            string expected = "HKI";
-            string actual = Asema.EtsiAsema(lyh.TekeeLyhenteet(), Asema.Trimmeri(nimi));
+            RataDigiTraffic.APIUtil rata = new RataDigiTraffic.APIUtil();
+            string nimi = "lApUA";
+            string expected = "LPA";
+            nimi = Asema.Trimmeri(nimi);
+            string actual = Asema.EtsiAsema(rata.Liikennepaikat(), nimi);
             Assert.AreEqual(expected, actual, "Isot ja pienet kirjaimet pielessä!");
         }
 
         [TestMethod()]
         public void OlematonKaupunginNimi()
         {
-            AsemaLyhenteet lyh = new AsemaLyhenteet();
-            lyh.TekeeLyhenteet();
+            RataDigiTraffic.APIUtil rata = new RataDigiTraffic.APIUtil();
             string nimi = "Virtanen";
             string expected = null;
-            string actual = Asema.EtsiAsema(lyh.TekeeLyhenteet(), nimi);
+            string actual = Asema.EtsiAsema(rata.Liikennepaikat(), nimi);
             Assert.AreEqual(expected, actual, "Ei ole kaupunki!");
         }
 
         [TestMethod()]
         public void YlimääräisetMerkit()
         {
-            AsemaLyhenteet lyh = new AsemaLyhenteet();
-            lyh.TekeeLyhenteet();
-            string nimi = "..hElsInki???";
-            string expected = "HKI";
-            string actual = Asema.EtsiAsema(lyh.TekeeLyhenteet(), Asema.Trimmeri(nimi));
+            RataDigiTraffic.APIUtil rata = new RataDigiTraffic.APIUtil();
+            string nimi = "..lApUa???";
+            string expected = "LPA";
+            string actual = Asema.EtsiAsema(rata.Liikennepaikat(), Asema.Trimmeri(nimi));
             Assert.AreEqual(expected, actual, "Ylimääräisiä merkkejä alussa ja lopussa!");
         }
         [TestMethod()]
         public void NumeroitaNimessä()
         {
-            AsemaLyhenteet lyh = new AsemaLyhenteet();
-            lyh.TekeeLyhenteet();
-            string nimi = "123123hElsInki";
-            string expected = "HKI";
-            string actual = Asema.EtsiAsema(lyh.TekeeLyhenteet(), Asema.Trimmeri(nimi));
+            RataDigiTraffic.APIUtil rata = new RataDigiTraffic.APIUtil();
+            string nimi = "12312lApUa";
+            string expected = "LPA";
+            string actual = Asema.EtsiAsema(rata.Liikennepaikat(), Asema.Trimmeri(nimi));
             Assert.AreEqual(expected, actual, "Ylimääräisiä merkkejä alussa ja lopussa!");
         }
 
         [TestMethod()]
         public void EtsiAsemaNumeroInput()
         {
-            AsemaLyhenteet lyh = new AsemaLyhenteet();
-            lyh.TekeeLyhenteet();
+            RataDigiTraffic.APIUtil rata = new RataDigiTraffic.APIUtil();
             string nimi = "45";
             string expected = null;
-            string actual = Asema.EtsiAsema(lyh.TekeeLyhenteet(), nimi);
+            string actual = Asema.EtsiAsema(rata.Liikennepaikat(), nimi);
             Assert.AreEqual(expected, actual, "Tyhjää inputtia ei osata käsitellä!");
         }
 
         [TestMethod()]
         public void SmashTheKeyboardNumeroInput()
         {
-            AsemaLyhenteet lyh = new AsemaLyhenteet();
-            lyh.TekeeLyhenteet();
+            RataDigiTraffic.APIUtil rata = new RataDigiTraffic.APIUtil();
             string nimi = "45";
             string expected = "Asemaa ei löydy!";
-            string actual = Asema.SmashTheKeyboard(lyh.TekeeLyhenteet(), nimi);
+            string actual = Asema.SmashTheKeyboard(rata.Liikennepaikat(), nimi);
             Assert.AreEqual(expected, actual, "Tyhjää inputtia ei osata käsitellä!");
         }
 

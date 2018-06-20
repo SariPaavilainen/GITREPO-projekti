@@ -12,8 +12,11 @@ namespace RataDigiTraffic
 {
     public class SeuraavaJuna
     {
+        //Koodasivat Olli ja Sari
         public static void KerroSeuraavatJunat()
         {
+            //Haetaan käyttäjän syötteen perusteella annetulle reitille seuraavat junat ja tulostetaan
+            //niiden lähtö- ja saapumistiedot.
             string lähtöasema;
             string kohdeasema;
             Asema.Konduktööri(out lähtöasema, out kohdeasema);
@@ -62,9 +65,11 @@ namespace RataDigiTraffic
                     if (counter == 6) { break; }
                 }
             }
+            // Jos käyttäjä syöttää lähtö- ja kohdeasemat, joiden välillä ei ole suoraa raideyhteyttä, 
+            // annetaan siitä ilmoitus.
             catch (Newtonsoft.Json.JsonSerializationException)
             {
-
+               
                 Console.WriteLine("Antamallesi yhteysvälille ei löydy suoraa junayhteyttä!");
                 return;
             }
