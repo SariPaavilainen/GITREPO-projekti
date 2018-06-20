@@ -68,7 +68,6 @@ namespace RataDigiTraffic
                 string uusiLähtö = SmashTheKeyboard(pekka.TekeeLyhenteet(), lähtö);
                 lähtöAsema = EtsiAsema(pekka.TekeeLyhenteet(), uusiLähtö);
                 lähtö = uusiLähtö;
-
                 if (lähtöAsema == null)
                 {
                     Console.WriteLine("Asemaa ei löydy!");
@@ -90,8 +89,9 @@ namespace RataDigiTraffic
                     Console.WriteLine("Asemaa ei löydy!");
                     goto annakohdeasema;
                 }
-
             }
+            Console.WriteLine($"Valittu matka: {lähtö}({lähtöAsema})  - { kohde}({kohdeAsema})");
+
 
         }
         //Koodasivat Sari ja Olli, muokkasi omaksi metodikseen Sari

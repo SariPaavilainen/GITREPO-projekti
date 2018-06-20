@@ -17,7 +17,7 @@ namespace RataDigiTraffic
             string lähtöasema;
             string kohdeasema;
             Asema.Konduktööri(out lähtöasema, out kohdeasema);
-            Console.WriteLine("Valittu matka: "+lähtöasema+ " - "+kohdeasema);
+            //Console.WriteLine("Valittu matka: "+lähtöasema+ " - "+kohdeasema);
             List<Juna> junat;
             string lähtöformat = "dd.MM klo HH.mm";
             string saapumisformat = "klo HH.mm";
