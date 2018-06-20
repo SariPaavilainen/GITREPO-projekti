@@ -19,18 +19,20 @@ namespace RataDigiTraffic
             Asema.Konduktööri(out lähtöasema, out kohdeasema);
             Console.WriteLine("Valittu matka: "+lähtöasema+ " - "+kohdeasema);
             List<Juna> junat;
+            string lähtöformat = "dd.MM klo HH.mm";
+            string saapumisformat = "klo HH.mm";
 
             RataDigiTraffic.APIUtil rata = new RataDigiTraffic.APIUtil();
             try
             {
                 junat = rata.JunatVälillä(lähtöasema, kohdeasema);
 
-                DateTime tänään = DateTime.Now.ToLocalTime();
                 int counter = 1;
                 foreach (var item in junat)
                 {
                     StringBuilder tulostus = new StringBuilder(counter + ". Juna " + item.trainType + " " + item.trainNumber + " lähtee asemalta " + lähtöasema + " ");
                     List<RataDigiTraffic.Model.Aikataulurivi> aikataulut = item.timeTableRows;
+
 
                     foreach (var rivi in aikataulut)
                     {
@@ -39,7 +41,7 @@ namespace RataDigiTraffic
                         {
 
 
-                            tulostus.Append(rivi.scheduledTime.ToLocalTime() + " ja saapuu asemalle " + kohdeasema + " ");
+                            tulostus.Append(rivi.scheduledTime.ToLocalTime().ToString(lähtöformat) + " ja saapuu asemalle " + kohdeasema + " ");
                             break;
 
 
@@ -50,7 +52,7 @@ namespace RataDigiTraffic
                     {
                         if (rivi.stationShortCode == kohdeasema && rivi.type.Contains("ARRIVAL"))
                         {
-                            tulostus.Append(rivi.scheduledTime.ToLocalTime());
+                            tulostus.Append(rivi.scheduledTime.ToLocalTime().ToString(saapumisformat));
                             break;
                         }
                     }
