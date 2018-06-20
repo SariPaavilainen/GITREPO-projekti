@@ -61,18 +61,45 @@ namespace RataDigiTraffic // Koodannut H-M ja Tatu
             foreach (var item in junat)
                 if (item.trainNumber == oikeanro) //{ return item.trainType; }
                 {
-
-                    Console.WriteLine("\n\nAseman lyhenne" + "\t" + "" + "\t" + "Kellonaika");
+                    string junanKulku = "";
+                    if (item.runningCurrently == true)
+                        junanKulku = "Juna on liikkeellä";
+                    if (item.runningCurrently == false)
+                        junanKulku = "Juna ei ole liikenteessä";
+                    Console.WriteLine("\n\n" + item.trainType + item.trainNumber + " " + item.departureDate.ToString("dd.MM.yyyy") + " " + junanKulku);
+                    
+                    Console.WriteLine("\n\nAseman lyhenne" + "\t" + "" + "\t" + "KLO"+ "\t\t" + "Arvioitu aika" + "\t" + "Toteutunut aika");
                     foreach (var rivi in item.timeTableRows)
                     {
                         string pysähdyksenTyyppi = "";
-                        if (rivi.type.Contains("ARRIVAL"))
+                        //if (rivi.type.Contains("ARRIVAL"))
+                        //    pysähdyksenTyyppi = "tulo";
+                        //if (rivi.type.Contains("DEPARTURE"))
+                        //    pysähdyksenTyyppi = "lähtö";
+
+                        if (rivi.commercialStop == true && rivi.type.Contains("ARRIVAL"))
+                        {
+
                             pysähdyksenTyyppi = "tulo";
-                        if (rivi.type.Contains("DEPARTURE"))
+                            Console.WriteLine(rivi.stationShortCode + "\t\t" + pysähdyksenTyyppi + "\t" + rivi.scheduledTime.ToLocalTime().ToString("HH:mm") + "\t\t"
+                                    + (rivi.liveEstimateTime > default(DateTime) ? rivi.liveEstimateTime.ToLocalTime().ToString("HH:mm") : "")
+                                    + "\t\t" + (rivi.actualTime > default(DateTime) ? rivi.actualTime.ToLocalTime().ToString("HH:mm") : "               "));
+                        }
+
+                        if (rivi.commercialStop == true && rivi.type.Contains("DEPARTURE"))
+                        {
+                            Console.BackgroundColor = ConsoleColor.DarkMagenta;
+                            Console.ForegroundColor = ConsoleColor.White;
+
                             pysähdyksenTyyppi = "lähtö";
-                        if (rivi.commercialStop == true) 
-                        Console.WriteLine(rivi.stationShortCode + "\t\t" + pysähdyksenTyyppi + "\t" + rivi.scheduledTime.ToLocalTime().ToString("HH:mm"));  // Muokattu koodia niin, että hakee aseman lyhenteen, pysähdyksen tyypin ja lokalisoidun ajan näille.   
-                    }
+                            Console.WriteLine(rivi.stationShortCode + "\t\t" + pysähdyksenTyyppi + "\t" + rivi.scheduledTime.ToLocalTime().ToString("HH:mm") + "\t\t"
+                                + (rivi.liveEstimateTime > default(DateTime) ? rivi.liveEstimateTime.ToLocalTime().ToString("HH:mm") : "")
+                                + "\t\t" + (rivi.actualTime > default(DateTime) ? rivi.actualTime.ToLocalTime().ToString("HH:mm") : "               "));  // Muokattu koodia niin, että hakee aseman lyhenteen, pysähdyksen tyypin ja lokalisoidun ajan näille.   
+
+                            Console.BackgroundColor = ConsoleColor.Black;
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+ }
                     return "";
                 }
             return "Syöttämääsi junaa ei löydy, tarkista antamasi numero";
