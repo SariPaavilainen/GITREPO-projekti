@@ -18,11 +18,11 @@ namespace DigiTrafficTester
             intro.Alku();
             Console.WriteLine("Tervetuloa Junajuttuun! Olen konduktööri Pekka.");
             Console.WriteLine("##############################################");
-            intro.PekkaImg();
+           
 
             string response = "k";
             do
-            {
+            {   intro.PekkaImg();
                 Console.WriteLine("Mitä haluat tehdä?\n 1) Etsiä seuraavat junat tietylle reitille\n 2) Hakea junan tiedot junan numerolla\n Info) Saada lisätietoa sovelluksesta");
                 string vastaus = Console.ReadLine();
                 if (vastaus == "1") {
