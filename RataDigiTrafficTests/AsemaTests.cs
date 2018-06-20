@@ -21,7 +21,7 @@ namespace RataDigiTraffic.Tests
             lyh.TekeeLyhenteet();
             string nimi = "heLsiNkI";
             string expected = "HKI";
-            string actual = Asema.EtsiAsema(lyh.TekeeLyhenteet(), nimi);
+            string actual = Asema.EtsiAsema(lyh.TekeeLyhenteet(), Asema.Trimmeri(nimi));
             Assert.AreEqual(expected, actual, "Isot ja pienet kirjaimet pielessä!");
         }
 
@@ -43,7 +43,7 @@ namespace RataDigiTraffic.Tests
             lyh.TekeeLyhenteet();
             string nimi = "..hElsInki???";
             string expected = "HKI";
-            string actual = Asema.EtsiAsema(lyh.TekeeLyhenteet(), nimi);
+            string actual = Asema.EtsiAsema(lyh.TekeeLyhenteet(), Asema.Trimmeri(nimi));
             Assert.AreEqual(expected, actual, "Ylimääräisiä merkkejä alussa ja lopussa!");
         }
         [TestMethod()]
@@ -53,20 +53,9 @@ namespace RataDigiTraffic.Tests
             lyh.TekeeLyhenteet();
             string nimi = "123123hElsInki";
             string expected = "HKI";
-            string actual = Asema.EtsiAsema(lyh.TekeeLyhenteet(), nimi);
+            string actual = Asema.EtsiAsema(lyh.TekeeLyhenteet(), Asema.Trimmeri(nimi));
             Assert.AreEqual(expected, actual, "Ylimääräisiä merkkejä alussa ja lopussa!");
         }
-
-        //[TestMethod()]
-        //public void SmashTheKeyboardTest()
-        //{
-        //    AsemaLyhenteet lyh = new AsemaLyhenteet();
-        //    lyh.TekeeLyhenteet();
-        //    string nimi = "heskilni";
-        //    string expected = "Helsinki";
-        //    string actual = Asema.SmashTheKeyboard(lyh.TekeeLyhenteet(), nimi);
-        //    Assert.AreEqual(expected, actual, "Smash the keyboard ei toimi!");
-        //}
 
         [TestMethod()]
         public void EtsiAsemaNumeroInput()
