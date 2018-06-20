@@ -170,14 +170,30 @@ namespace RataDigiTraffic
                 try
                 {
                     listaus.Add(kirjainlaskuri.ToString(), item);
-                    kirjainlaskuri = 0;
+                  
                 }
                 catch (Exception)
                 {
+                    bool virhe = true;
+                    while (virhe)
+                    {
+                        try
+                        {
+                            kirjainlaskuri++;
+                            listaus.Add(kirjainlaskuri.ToString(), item);
+                            virhe = false;
 
-                    kirjainlaskuri++;
-                    listaus.Add(kirjainlaskuri.ToString(), item);
+                        }
+                        catch
+                        {
+                            virhe = true;
+
+
+                        }
+                    }
                 }
+                kirjainlaskuri = 0;
+
             }
             return listaus;
         }
