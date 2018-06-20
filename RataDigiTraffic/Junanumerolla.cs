@@ -58,6 +58,21 @@ namespace RataDigiTraffic // Koodannut H-M ja Tatu
             }
             List<Juna> junat = hakutaski.Result;
 
+            string EtsiAsemannimiShortCodesta(List<Liikennepaikka> lista, string nimi)
+            {
+
+                //Etsitään käyttäjän syöte listasta
+                foreach (var item in lista)
+                {
+                    if (item.stationShortCode == nimi) { return item.stationName.PadRight(20); }
+                    else { continue; }
+                }
+
+                return null;
+
+
+            }
+
             foreach (var item in junat)
                 if (item.trainNumber == oikeanro) //{ return item.trainType; }
                 {
@@ -68,7 +83,7 @@ namespace RataDigiTraffic // Koodannut H-M ja Tatu
                         junanKulku = "Juna ei ole liikenteessä";
                     Console.WriteLine("\n\n" + item.trainType + item.trainNumber + " " + item.departureDate.ToString("dd.MM.yyyy") + " " + junanKulku);
                     
-                    Console.WriteLine("\n\nAseman lyhenne" + "\t" + "" + "\t" + "KLO"+ "\t\t" + "Arvioitu aika" + "\t" + "Toteutunut aika");
+                    Console.WriteLine("\n\nAseman nimi" + "\t" + "" + "\t\t\t\t" + "KLO"+ "\t\t" + "Arvioitu aika" + "\t" + "Toteutunut aika");
                     foreach (var rivi in item.timeTableRows)
                     {
                         string pysähdyksenTyyppi = "";
@@ -79,11 +94,11 @@ namespace RataDigiTraffic // Koodannut H-M ja Tatu
 
                         if (rivi.commercialStop == true && rivi.type.Contains("ARRIVAL"))
                         {
-
+                            
                             pysähdyksenTyyppi = "tulo";
-                            Console.WriteLine(rivi.stationShortCode + "\t\t" + pysähdyksenTyyppi + "\t" + rivi.scheduledTime.ToLocalTime().ToString("HH:mm") + "\t\t"
-                                    + (rivi.liveEstimateTime > default(DateTime) ? rivi.liveEstimateTime.ToLocalTime().ToString("HH:mm") : "")
-                                    + "\t\t" + (rivi.actualTime > default(DateTime) ? rivi.actualTime.ToLocalTime().ToString("HH:mm") : "               "));
+                            Console.WriteLine(EtsiAsemannimiShortCodesta(rata.Liikennepaikat(), rivi.stationShortCode) + "\t\t\t" + pysähdyksenTyyppi + "\t" + rivi.scheduledTime.ToLocalTime().ToString("HH:mm") + "\t\t"
+                            + (rivi.liveEstimateTime > default(DateTime) ? rivi.liveEstimateTime.ToLocalTime().ToString("HH:mm") : "")
+                            + "\t\t" + (rivi.actualTime > default(DateTime) ? rivi.actualTime.ToLocalTime().ToString("HH:mm") : "               "));
                         }
 
                         if (rivi.commercialStop == true && rivi.type.Contains("DEPARTURE"))
@@ -92,7 +107,7 @@ namespace RataDigiTraffic // Koodannut H-M ja Tatu
                             Console.ForegroundColor = ConsoleColor.White;
 
                             pysähdyksenTyyppi = "lähtö";
-                            Console.WriteLine(rivi.stationShortCode + "\t\t" + pysähdyksenTyyppi + "\t" + rivi.scheduledTime.ToLocalTime().ToString("HH:mm") + "\t\t"
+                            Console.WriteLine (EtsiAsemannimiShortCodesta(rata.Liikennepaikat(), rivi.stationShortCode) + "\t\t\t" + pysähdyksenTyyppi + "\t" + rivi.scheduledTime.ToLocalTime().ToString("HH:mm") + "\t\t"
                                 + (rivi.liveEstimateTime > default(DateTime) ? rivi.liveEstimateTime.ToLocalTime().ToString("HH:mm") : "")
                                 + "\t\t" + (rivi.actualTime > default(DateTime) ? rivi.actualTime.ToLocalTime().ToString("HH:mm") : "               "));  // Muokattu koodia niin, että hakee aseman lyhenteen, pysähdyksen tyypin ja lokalisoidun ajan näille.   
 
