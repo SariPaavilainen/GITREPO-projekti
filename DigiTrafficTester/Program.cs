@@ -27,11 +27,19 @@ namespace DigiTrafficTester
                 string vastaus = Console.ReadLine();
                 if (vastaus == "1") {
                     Console.Clear();
-                    intro.PekkaImg(); SeuraavaJuna.KerroSeuraavatJunat(); }
+                    Console.WriteLine("SEURAAVAT JUNAT REITILLE");
+                    Console.WriteLine("##############################");
+                    intro.PekkaImg();
+                    Console.WriteLine("Etsitään seuraavat junat haluamallesi reitille.");
+                    SeuraavaJuna.KerroSeuraavatJunat(); }
                 if (vastaus == "2")
                 {
                     Console.Clear();
+                    Console.WriteLine("TIEDOT JUNAN NUMEROLLA");
+                    Console.WriteLine("##############################");
                     intro.PekkaImg();
+                    Console.WriteLine("Etsitään haluamasi junan seuraavan lähdön tiedot.");
+
                     Console.WriteLine("Anna junan numero");
                     string junaSyöte = Console.ReadLine();
                     Console.WriteLine(Junanumerolla.EtsiJuna(junaSyöte));
@@ -48,6 +56,7 @@ namespace DigiTrafficTester
                         "Academy Finlandin C#.NET Accelerated Learning -koulutusohjelman miniprojektina,\n"+
                         "ja sen ovat kehittäneet Hanna-Mari Lapp (@hmlapp), Sari Paavilainen (@SariPaavilainen),\n"+
                         "Olli Piilonen (@ollipiilonen) ja Tatu Vahteri (@tatuvahteri).\n\n"+
+                        "Grafiikka https://asciiart.eu; Äänitehosteet https://zapsplat.com \n"+
                         "##############################");
                 }
                 else { continue; }
